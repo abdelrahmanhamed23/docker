@@ -1,0 +1,14 @@
+# we will pull image from docker hub after searching for it and it will be ubuntu:latest
+docker pull ubuntu:latest
+# we will create container from it and set resources for it
+docker run -d -ti --name lab1 --restart always --memory 100M --cpus 0.5 ubuntu:latest
+# we will enter container
+docker exec -ti lab1 bash
+# we will do update firstly
+apt update
+# we will install nano
+apt install nano
+# we will exit from container
+exit
+# we will commit the changes into new image and tag it
+docker commit lab1 ubuntu-myapp:latest
