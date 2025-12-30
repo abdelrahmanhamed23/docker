@@ -1,0 +1,23 @@
+# we have 3 sorts of docker networks
+# Bridge (default)
+# Host (have same IP with the machine it slef)
+# Null (fully isolated)
+#we should create custome network
+# I will create 2 netowkrs with 4 container 
+#first check what is the network is available
+docker network ls
+#create first public network
+docker network create senior-netowrk1 --subnet 10.0.0.0/24 --gateway 10.0.0.1 --driver bridge
+#create second private network
+docker network create senior-network2 --subnet 20.0.0.0/24 --gateway 20.0.0.1 --internal
+#inspect on 2 network to confirm
+docker network inspect senior-network1 senior-network2 | egrep -i internal
+#create container and mapp it to 90:80
+docker run -d --name laba -p 90:80 --network senior-network1 httpd:latest
+#create container and mapp it to 91:80
+docker run -d --name labb -p 91:80 --network senior-network1 httpd:latest
+#create container with private network
+docker run -d --name labx --network senior-network2 httpd:latest
+#create container with private network
+docker run -d --name laby --network senior-network2 httpd:latest
+#test those network is working as expected
