@@ -1,0 +1,7 @@
+# CHECK FOR DOCKER CONTAINERS
+docker ps
+# CHECK FOR DOCKER CONTAINERS ALL (even if stopped)
+docker ps -a / docker ps --all
+# CHECK FOR DOCKER IMAGES
+docker images
+
