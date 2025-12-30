@@ -1,0 +1,11 @@
+#we will check firstly for any docker volume
+docker volume ls
+#create docker volume
+docker volume create appdata
+#check where is dokcer volume mounted
+docker volume inspect appdate
+#create docker container and mount it with docker volume
+docker run -d --name labx -p 80:80 --volume appdate:/usr/local/apache2 httpd:latest
+#read mounted path
+sudo ls $mounted_path$
+#we need to update in mounted path and confirm that path is changed
