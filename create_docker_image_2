@@ -1,0 +1,27 @@
+# open nano / vim editor (should be its name is Dockerfile)
+nano Dockerfile
+# Dockerfile content should be as follow
+#Add base image to start from it 
+FROM httpd:latest
+#Add environment variables that we want to use
+ENV APP_1= Senior1 APP_2= Senior2
+ENV APP_3= Senior3
+#Open ports
+EXPOSE 80
+#Copey file from machine to docker container
+COPEY index.html /usr/local/apache2/htdocs
+#Add Default Working Directory
+WORKDIR /usr/local/apache2
+#Command should be run (install nano)
+RUN apt update
+RUN apt install nano
+#Command in startup
+CMD ["httpd-foreground"]
+# Save and close nano
+#update index.html to see it on the image
+#create image from docker file
+docker build -t senior-app:v1.0 .
+#tag this image to pull it in docker hub account (after login)
+docker tag senior-app:v1.0 abdelrahmanhamed/docker1:latest
+#then push the image
+docker push abdelrahmanhamed/docker1:latest
